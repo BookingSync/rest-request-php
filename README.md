@@ -2,7 +2,7 @@
 
 ## What is it?
 
-A REST client for PHP made to work with [BookingSync][bs]'s JSON [API][api] and Basic Auth
+A REST client for PHP made to work with [BookingSync][bs]'s [REST API][api] and Basic Auth
 
 ## Usage
 
