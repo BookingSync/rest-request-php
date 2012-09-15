@@ -4,10 +4,17 @@
 
 A REST client for PHP made to work with [BookingSync][bs]'s [REST API][api] and Basic Auth
 
+## Supported PHP version
+
+The default library is made for PHP 5.2 and upward.
+
+Users of PHP 4 can use the compatible set of libraries from the PHP4 folder. Even if this libraries are upward compatible the default version if recommended when ever possible.
+
 ## Usage
 
     <?php
-    require_once 'RestRequest.inc.php'
+    require_once 'RestRequest.php';
+    // require_once 'JSON_support.php'; // Only required if using the PHP4 version
 
     $account_id = 'YOUR_ACCOUNT_ID';
 

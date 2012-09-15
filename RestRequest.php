@@ -219,3 +219,4 @@ class RestRequest
 		$this->verb = $verb;
 	}
 }
+?>

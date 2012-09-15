@@ -5,7 +5,8 @@
 // http://www.php.net/manual/en/function.json-decode.php
 // http://www.php.net/manual/en/language.types.array.php
 
-require_once '../RestRequest.inc.php';
+require_once '../RestRequest.php';
+// require_once 'JSON_support.php'; // Only required if using the PHP4 version
 
 $account_id = 'YOUR_ACCOUNT_ID';
 
