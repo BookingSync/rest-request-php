@@ -6,7 +6,7 @@
 // http://www.php.net/manual/en/language.types.array.php
 
 require_once '../class/RestRequest.php';
-// require_once 'JSON_support.php'; // Only required if using the PHP4 version
+// require_once '../class/JSON_support.php'; // Only required if using the PHP4 version
 
 $account_id = 'YOUR_ACCOUNT_ID';
 
