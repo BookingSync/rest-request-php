@@ -13,8 +13,8 @@ Users of PHP 4 can use the compatible set of libraries from the PHP4 folder. Eve
 ## Usage
 
     <?php
-    require_once 'RestRequest.php';
-    // require_once 'JSON_support.php'; // Only required if using the PHP4 version
+    require_once 'class/RestRequest.php';
+    // require_once 'class/JSON_support.php'; // Only required if using the PHP4 version
 
     $account_id = 'YOUR_ACCOUNT_ID';
 
