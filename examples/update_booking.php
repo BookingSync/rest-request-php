@@ -21,5 +21,5 @@ $request->setApiToken($api_token);
 $request->execute();
 
 // echo '<pre>' . print_r($request, true) . '</pre>';
-var_dump(json_decode($request->getResponseBody()));
+var_dump($request->getDecodedResponse());
 ?>
