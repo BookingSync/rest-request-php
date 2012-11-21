@@ -19,16 +19,16 @@ class RestRequest
 
 	public function __construct ($url = null, $verb = 'GET', $requestBody = null)
 	{
-		$this->url				= $url;
-		$this->verb				= $verb;
+		$this->url				    = $url;
+		$this->verb				    = $verb;
 		$this->requestBody		= $requestBody;
 		$this->requestLength	= 0;
-		$this->authMethod   = CURLAUTH_BASIC;
-        $this->timeout = 10;
-		$this->username			= null;
-		$this->password			= null;
-		$this->acceptType		= 'application/json';
-		$this->contentType  = 'application/json';
+		$this->authMethod     = CURLAUTH_BASIC;
+		$this->timeout        = 10;
+		$this->username			  = null;
+		$this->password			  = null;
+		$this->acceptType		  = 'application/json';
+		$this->contentType    = 'application/json';
 		$this->responseBody		= null;
 		$this->responseInfo		= null;
 
@@ -42,7 +42,7 @@ class RestRequest
 	{
 		$this->requestBody		= null;
 		$this->requestLength	= 0;
-		$this->verb				= 'GET';
+		$this->verb				    = 'GET';
 		$this->responseBody		= null;
 		$this->responseInfo		= null;
 	}
@@ -156,7 +156,7 @@ class RestRequest
 
 	protected function setCurlOpts (&$curlHandle)
 	{
-        curl_setopt($curlHandle, CURLOPT_TIMEOUT, $this->timeout);
+    curl_setopt($curlHandle, CURLOPT_TIMEOUT, $this->timeout);
 		curl_setopt($curlHandle, CURLOPT_URL, $this->url);
 		curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
@@ -192,10 +192,10 @@ class RestRequest
 		return $this->responseBody;
 	}
 
-    public function getDecodedResponse ()
-    {
-        return json_decode($this->responseBody, true);
-    }
+  public function getDecodedResponse ()
+  {
+    return json_decode($this->responseBody, true);
+  }
 
 	public function getResponseInfo ()
 	{
@@ -228,9 +228,9 @@ class RestRequest
 		$this->verb = $verb;
 	}
 
-    public function setTimeout ($timeout)
-    {
-        $this->timeout = $timeout;
-    }
+  public function setTimeout ($timeout)
+  {
+      $this->timeout = $timeout;
+  }
 }
 ?>

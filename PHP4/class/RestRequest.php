@@ -16,7 +16,7 @@ class RestRequest {
 		$this->requestBody		= $requestBody;
 		$this->requestLength	= 0;
 		$this->authMethod     = CURLAUTH_BASIC;
-        $this->timeout          = 10;
+    $this->timeout        = 10;
 		$this->username			  = null;
 		$this->password			  = null;
 		$this->acceptType		  = 'application/json';
@@ -145,20 +145,20 @@ class RestRequest {
 		$this->acceptType = $acceptType;
 	}
 
-    function getResponseBody() {
+  function getResponseBody() {
 		return $this->responseBody;
 	}
 
-    /**
-     * Requires external JSON decoder such as Services_JSON, PEAR, etc
-     */
-    function getDecodedResponse () {
-        if (function_exists('json_decode')) {
-            return json_decode($this->responseBody, true);
-        } else {
-            return $this->responseBody;
-        }
+  /**
+   * Requires external JSON decoder such as Services_JSON, PEAR, etc
+   */
+  function getDecodedResponse () {
+    if (function_exists('json_decode')) {
+      return json_decode($this->responseBody, true);
+    } else {
+      return $this->responseBody;
     }
+  }
 
 	function getResponseInfo() {
 		return $this->responseInfo;
@@ -185,8 +185,8 @@ class RestRequest {
 		$this->verb = $verb;
 	}
 
-    function setTimeout($timeout) {
-        $this->timeout = $timeout;
-    }
+  function setTimeout($timeout) {
+    $this->timeout = $timeout;
+  }
 }
 ?>

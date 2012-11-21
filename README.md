@@ -22,7 +22,7 @@ Users of PHP 4 can use the compatible set of libraries from the PHP4 folder. Eve
     $request = new RestRequest('https://www.bookingsync.com/mybookings/' . $account_id . '.json', 'GET');
     $request->execute();
 
-    var_dump(json_decode($request->getResponseBody()));
+    var_dump($request->getDecodedResponse());
     ?>
 
 More example of usage can be found in the [examples][examples]
