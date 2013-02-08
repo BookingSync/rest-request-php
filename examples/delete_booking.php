@@ -11,7 +11,7 @@ require_once '../class/RestRequest.php';
 $api_token = 'YOUR_API_TOKEN'; // can be found in your profile: https://www.bookingsync.com/en/profile#api_token
 $booking_id = 'YOUR_BOOKING_ID';
 
-// Update a booking: http://www.bookingsync.com/en/documentation/api/bookings#bookings-update
+// Delete a booking: http://www.bookingsync.com/en/documentation/api/bookings#bookings-destroy
 $request = new RestRequest('https://www.bookingsync.com/bookings/' . $booking_id . '.json', 'DELETE');
 $request->setApiToken($api_token);
 $request->execute();
