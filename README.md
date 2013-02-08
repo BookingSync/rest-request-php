@@ -27,6 +27,10 @@ Users of PHP 4 can use the compatible set of libraries from the PHP4 folder. Eve
 
 More example of usage can be found in the [examples][examples]
 
+## Install
+
+Note: Make sure to have the `cacert.pem` file in the same folder than `RestRequest.php`
+
 ## License
 
 This code is free to be used under the terms of the [MIT license][mit].
