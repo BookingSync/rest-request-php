@@ -14,7 +14,6 @@ require_once '../class/RestRequest.php';
 $api_token = ''; // can be found in your profile: https://www.bookingsync.com/en/profile#api_token
 $rental_id = ''; // the rental ID from wich you want to load the synchronizers' setup page
 
-// Get rentals: http://www.bookingsync.com/en/documentation/api/rentals#rentals-list
 $request = new RestRequest('https://www.bookingsync.com/rentals/' . $rental_id . '/extrenter.json', 'GET');
 $request->setApiToken($api_token);
 $request->execute();
