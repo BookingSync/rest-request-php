@@ -1,5 +1,5 @@
 {
     "require": {
-        "bookingsync/oauth2-bookingsync-php": "^0.1.2"
+        "bookingsync/oauth2-bookingsync-php": "^0.1.3"
     }
 }
