@@ -18,11 +18,16 @@ $provider = new Bookingsync\OAuth2\Client\Provider\Bookingsync([
     'scopes'            => ['public'] // scopes required by your BookingSync application.
 ]);
 
+session_start();
+
 if (!isset($_GET['code'])) {
 
     // If we don't have an authorization code then get one
     $authUrl = $provider->getAuthorizationUrl();
+
+    // Store the state in session. Used to mitigate CSRF attack
     $_SESSION['oauth2state'] = $provider->state;
+
     header('Location: '.$authUrl);
     exit;
 
