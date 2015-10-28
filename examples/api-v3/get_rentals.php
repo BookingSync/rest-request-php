@@ -14,7 +14,7 @@ require_once '../../class/RestRequest.php';
 $provider = new Bookingsync\OAuth2\Client\Provider\Bookingsync([
     'clientId'          => 'XXXXXXXX',
     'clientSecret'      => 'XXXXXXXX',
-    'redirectUri'       => 'https://localhost:8080/get_rentals.php', // https is mandatory for BookingSync
+    'redirectUri'       => 'https://localhost/get_rentals.php', // https is mandatory for BookingSync
     'scopes'            => ['public'] // scopes required by your BookingSync application.
 ]);
 
@@ -54,7 +54,7 @@ if (!isset($_GET['code'])) {
         printf('Hello %s!', $userDetails->name);
 
         // Get rentals: http://developers.bookingsync.com/reference/endpoints/rentals/
-        $request = new RestRequest('https://www.bookingsync.com/api/v3/rentals.json', 'GET');
+        $request = new RestRequest('https://www.bookingsync.com/api/v3/rentals', 'GET');
         $request->setAccessToken($token->accessToken);
         $request->execute();
 
