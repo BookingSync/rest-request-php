@@ -61,6 +61,7 @@ if (!isset($_GET['code'])) {
         echo '<pre>' . print_r($request, true) . '</pre>';
         echo '<pre>';
         var_dump($request->getDecodedResponse());
+        echo '</pre>';
 
         // If the accessToken is expired, you can check $token->expires to get the expiration timestamp,
         // you need to refresh the accessTokens by using:
