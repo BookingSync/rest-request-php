@@ -14,7 +14,7 @@ require_once '../../class/RestRequest.php';
 $provider = new Bookingsync\OAuth2\Client\Provider\Bookingsync([
     'clientId'          => 'XXXXXXXX',
     'clientSecret'      => 'XXXXXXXX',
-    'redirectUri'       => 'https://localhost/get_rentals.php', // https is mandatory for BookingSync
+    'redirectUri'       => 'https://localhost/authorize.php', // https is mandatory for BookingSync
     'scopes'            => ['public'] // scopes required by your BookingSync application.
 ]);
 
@@ -44,37 +44,9 @@ if (!isset($_GET['code'])) {
         'code' => $_GET['code']
     ]);
 
-    // Optional: Now you have a token you can look up a users profile data
-    try {
+    echo '<pre>';
+    var_dump($token);
+    echo '</pre>';
 
-        // We got an access token, let's now get the user's details
-        $userDetails = $provider->getUserDetails($token);
-
-        // Use these details to create a new profile
-        printf('Hello %s!', $userDetails->name);
-
-        // Get rentals: http://developers.bookingsync.com/reference/endpoints/rentals/
-        $request = new RestRequest('https://www.bookingsync.com/api/v3/rentals', 'GET');
-        $request->setAccessToken($token->accessToken);
-        $request->execute();
-
-        echo '<pre>' . print_r($request, true) . '</pre>';
-        echo '<pre>';
-        var_dump($request->getDecodedResponse());
-        echo '</pre>';
-
-        // If the accessToken is expired, you can check $token->expires to get the expiration timestamp,
-        // you need to refresh the accessTokens by using:
-        // $grant = new \League\OAuth2\Client\Grant\RefreshToken();
-        // $token = $provider->getAccessToken($grant, ['refresh_token' => $token->refreshToken]);
-
-        // echo "<pre>";
-        // var_dump($token);
-
-    } catch (Exception $e) {
-
-        // Failed to get user details
-        exit('Oh dear...');
-    }
 }
 ?>
