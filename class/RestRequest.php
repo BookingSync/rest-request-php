@@ -13,6 +13,7 @@ class RestRequest
   protected $requestLength;
   protected $accessToken;
   protected $acceptType;
+  protected $responseHeader;
   protected $responseBody;
   protected $responseInfo;
 
@@ -26,6 +27,7 @@ class RestRequest
     $this->accessToken    = null;
     $this->acceptType     = 'application/vnd.api+json';
     $this->contentType    = 'application/vnd.api+json';
+    $this->responseHeader = null;
     $this->responseBody   = null;
     $this->responseInfo   = null;
 
@@ -163,6 +165,16 @@ class RestRequest
     curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
     curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
     curl_setopt($curlHandle, CURLOPT_CAINFO, dirname(__FILE__).'/cacert.pem');
+    curl_setopt($curlHandle, CURLOPT_HEADERFUNCTION, array(&$this, 'parseHeader'));
+  }
+
+  protected function parseHeader($curl, $header_line) {
+    $header = explode(': ', $header_line);
+
+    if(count($header) > 1)
+      $this->responseHeader[$header[0]] = trim($header[1]);
+
+    return strlen($header_line);
   }
 
   public function getAcceptType ()
