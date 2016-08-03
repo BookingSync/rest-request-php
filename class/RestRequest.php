@@ -42,6 +42,7 @@ class RestRequest
     $this->requestBody    = null;
     $this->requestLength  = 0;
     $this->verb           = 'GET';
+    $this->responseHeader = null;
     $this->responseBody   = null;
     $this->responseInfo   = null;
   }
@@ -185,6 +186,11 @@ class RestRequest
   public function setAcceptType ($acceptType)
   {
     $this->acceptType = $acceptType;
+  }
+  
+  public function getResponseHeader ()
+  {
+    return $this->responseHeader;
   }
 
   public function getResponseBody ()
