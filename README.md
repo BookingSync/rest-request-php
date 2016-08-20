@@ -14,6 +14,10 @@ Users of PHP 4 can use the compatible set of libraries from the PHP4 folder. Eve
 
 Example of usage can be found in the [examples][examples]
 
+Our examples are using [oauth2 bookingsync php](https://github.com/BookingSync/oauth2-bookingsync-php). PHP 5.4 is required here.
+
+You might also want to read our [Getting Started with PHP Guide](http://developers.bookingsync.com/guides/getting-started-with-php/)
+
 ## Install
 
 Note: Make sure to have the `cacert.pem` file in the same folder than `RestRequest.php`
