@@ -11,90 +11,50 @@ require_once '../../class/RestRequest.php';
 
 # Application credential can be found at https://www.bookingsync.com/en/partners/applications
 # once you've created your first BookingSync application.
+
+// Retrieved from a securely stored location.
+// See https://github.com/BookingSync/rest-request-php/blob/master/examples/api-v3/authorize.php for auth part.
+$refreshToken = 'XXXXXXXX';
+
 $provider = new Bookingsync\OAuth2\Client\Provider\Bookingsync([
-    'clientId'          => 'XXXX',
-    'clientSecret'      => 'XXXX',
-    'redirectUri'       => 'https://localhost/fetch_bookings_pages.php', // https is mandatory for BookingSync
+    'clientId'          => 'XXXXXXXX',
+    'clientSecret'      => 'XXXXXXXX',
+    'redirectUri'       => 'https://localhost/fetch_bookings_pages.php',
     'scopes'            => ['public'] // scopes required by your BookingSync application.
 ]);
 
-session_start();
+$grant = new \League\OAuth2\Client\Grant\RefreshToken();
+$token = $provider->getAccessToken($grant, ['refresh_token' => $refreshToken]);
 
-if (!isset($_GET['code'])) {
+// Get bookings first page: http://developers.bookingsync.com/reference/endpoints/bookings/
+$request = new RestRequest('https://www.bookingsync.com/api/v3/bookings', 'GET');
+$request->setAccessToken($token->accessToken);
+$request->execute();
 
-    // If we don't have an authorization code then get one
-    $authUrl = $provider->getAuthorizationUrl();
+echo '<pre>' . print_r($request, true) . '</pre>';
 
-    // Store the state in session. Used to mitigate CSRF attack
-    $_SESSION['oauth2state'] = $provider->state;
+$bookings = [];
 
-    header('Location: '.$authUrl);
-    exit;
-
-// Check given state against previously stored one to mitigate CSRF attack
-} elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
-
-    unset($_SESSION['oauth2state']);
-    exit('Invalid state');
-
-} else {
-
-    // Try to get an access token (using the authorization code grant)
-    $token = $provider->getAccessToken('authorization_code', [
-        'code' => $_GET['code']
-    ]);
-
-    // Optional: Now you have a token you can look up a users profile data
-    try {
-
-        // We got an access token, let's now get the user's details
-        $userDetails = $provider->getUserDetails($token);
-
-        // Use these details to create a new profile
-        printf('Hello %s!', $userDetails->name);
-
-        // Get bookings: http://developers.bookingsync.com/reference/endpoints/bookings/
-        $request = new RestRequest('https://www.bookingsync.com/api/v3/bookings', 'GET');
+for ($i = 1; $i <= $request->getResponseHeader()["X-Total-Pages"]; $i++) {
+    if($i == 1) {
+        $links = $request->getDecodedResponse()["links"];
+        $bookings = $request->getDecodedResponse()["bookings"];
+        $meta = $request->getDecodedResponse()["meta"];
+    } else {
+        $request = new RestRequest('https://www.bookingsync.com/api/v3/bookings?page='.$i, 'GET');
         $request->setAccessToken($token->accessToken);
         $request->execute();
 
-        echo '<pre>' . print_r($request, true) . '</pre>';
-
-        $bookings = [];
-
-        for ($i = 1; $i <= $request->getResponseHeader()["X-Total-Pages"]; $i++) {
-            if($i == 1) {
-                $links = $request->getDecodedResponse()["links"];
-                $bookings = $request->getDecodedResponse()["bookings"];
-                $meta = $request->getDecodedResponse()["meta"];
-            }
-            else {
-                $request = new RestRequest('https://www.bookingsync.com/api/v3/bookings?page='.$i, 'GET');
-                $request->setAccessToken($token->accessToken);
-                $request->execute();
-
-                $bookings = array_merge($bookings, $request->getDecodedResponse()["bookings"]);
-            }
-        }
-
-        $results = ["links" => $links, "bookings" => $bookings, "meta" => $meta];
-
-        echo '<pre>';
-        var_dump($results);
-        echo '</pre>';
-
-        // If the accessToken is expired, you can check $token->expires to get the expiration timestamp,
-        // you need to refresh the accessTokens by using:
-        // $grant = new \League\OAuth2\Client\Grant\RefreshToken();
-        // $token = $provider->getAccessToken($grant, ['refresh_token' => $token->refreshToken]);
-
-        // echo "<pre>";
-        // var_dump($token);
-
-    } catch (Exception $e) {
-
-        // Failed to get user details
-        exit('Oh dear...');
+        $bookings = array_merge($bookings, $request->getDecodedResponse()["bookings"]);
     }
 }
+
+// Contains all bookings 
+$results = ["links" => $links, "bookings" => $bookings, "meta" => $meta];
+
+echo '<pre>';
+var_dump($results);
+echo '</pre>';
+
+
 ?>
