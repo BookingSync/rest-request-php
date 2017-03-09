@@ -13,6 +13,7 @@ require_once '../../class/RestRequest.php';
 # once you've created your first BookingSync application.
 
 // Retrieved from a securely stored location.
+// See https://github.com/BookingSync/rest-request-php/blob/master/examples/api-v3/authorize.php for auth part.
 $refreshToken = 'XXXXXXXX';
 
 $provider = new Bookingsync\OAuth2\Client\Provider\Bookingsync([
