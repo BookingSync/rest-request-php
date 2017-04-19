@@ -12,9 +12,9 @@ require_once '../../class/RestRequest.php';
 # Application credential can be found at https://www.bookingsync.com/en/partners/applications
 # once you've created your first BookingSync application.
 $provider = new Bookingsync\OAuth2\Client\Provider\Bookingsync([
-    'clientId'          => 'XXXXXXXX',
-    'clientSecret'      => 'XXXXXXXX',
-    'redirectUri'       => 'https://localhost/get_rentals.php', // https is mandatory for BookingSync
+    'clientId'          => '0a893b5d2b20b18765d28ded825f83324a3ff525f60453ba0e463588189e1aa2',
+    'clientSecret'      => '41a56ad2bd9ae7ab8caad05f56c938ff49e4e92a99276e1149ab865f2fe89509',
+    'redirectUri'       => 'https://bsa-rest-php.dev/get_rentals.php', // https is mandatory for BookingSync
     'scopes'            => ['public'] // scopes required by your BookingSync application.
 ]);
 
