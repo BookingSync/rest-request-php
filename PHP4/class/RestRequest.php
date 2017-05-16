@@ -16,7 +16,7 @@ class RestRequest {
     $this->requestBody    = $requestBody;
     $this->requestLength  = 0;
     $this->authMethod     = CURLAUTH_BASIC;
-    $this->timeout        = 10;
+    $this->timeout        = 20;
     $this->accessToken    = null;
     $this->acceptType     = 'application/vnd.api+json';
     $this->contentType    = 'application/vnd.api+json';

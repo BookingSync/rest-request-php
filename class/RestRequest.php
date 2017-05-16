@@ -23,7 +23,7 @@ class RestRequest
     $this->verb           = $verb;
     $this->requestBody    = $requestBody;
     $this->requestLength  = 0;
-    $this->timeout        = 10;
+    $this->timeout        = 20;
     $this->accessToken    = null;
     $this->acceptType     = 'application/vnd.api+json';
     $this->contentType    = 'application/vnd.api+json';
@@ -187,7 +187,7 @@ class RestRequest
   {
     $this->acceptType = $acceptType;
   }
-  
+
   public function getResponseHeader ()
   {
     return $this->responseHeader;
