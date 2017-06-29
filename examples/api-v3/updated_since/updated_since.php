@@ -54,10 +54,10 @@ if (!isset($_GET['code'])) {
     $request->execute();
 
     // If there are new bookings since updated_since
-    if ($request->getResponseHeader()['X-Total-Count'] > 1) {
+    if ($request->getResponseHeader()['X-Total-Count'] >= 1) {
 
         // Get new updated_since from first page
-        $new_updated_since = DateTime::createFromFormat('Y-m-d H:i:s e', $request->getResponseHeader()["x-updated-since-request-synced-at"])->format(DateTime::ISO8601);
+        $new_updated_since = DateTime::createFromFormat('Y-m-d H:i:s e', $request->getResponseHeader()["x-updated-since-request-synced-at"])->format('Y-m-d\TH:i:s\Z');
         $bookings = [];
 
         // Loop new bookings pages
